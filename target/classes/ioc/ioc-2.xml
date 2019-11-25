@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	
+	<bean id="car1" class="com.sp.bdi.test.test2.Car">
+		<constructor-arg value="소나타"></constructor-arg>
+	</bean>
+	
+	<bean id="car2" class="com.sp.bdi.test.test2.Car">
+		<constructor-arg value="1000"></constructor-arg>
+	</bean>
+	
+	<bean id="carMaker" class="com.sp.bdi.test.test2.CarMaker">
+		<constructor-arg value="기아"></constructor-arg>
+		<property name="car"><!-- 앞에 자동으로 set(car)를 붙임 -->
+			<ref bean="car1"/><!-- 위의 bean id="car" -->
+		</property>
+		<property name="price"><!-- 앞에 자동으로 set(car)를 붙임 -->
+			<ref bean="car2"/><!-- 위의 bean id="car" -->
+		</property>
+	</bean>
+</beans>
