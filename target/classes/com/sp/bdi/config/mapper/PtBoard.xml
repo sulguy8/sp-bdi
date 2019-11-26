@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PtBoard">
+	<resultMap type="com.mvn.test.vo.PtBoardVO" id="pb">
+		<result property="pbContent" column="pb_content"
+			jdbcType="CLOB" javaType="string" />
+	</resultMap>
+
+	<select id="selectPtBoardList" resultMap="pb">
+		select * from photo_board order by pb_num desc
+	</select>
+
+
+	<select id="selectPtBoard"
+		resultMap="pb">
+		select * from photo_board where pb_num=#{pbNum}
+	</select>
+
+	<insert id="insertPtBoard" parameterType="com.mvn.test.vo.PtBoardVO">
+		insert into photo_board
+		values(seq_pb_num.nextval,#{pbTitle},#{pbContent},#{pbImg1Name},#{pbImg2Name},#{pbImg1Names},#{pbImg2Names},
+		to_char(sysdate,'YYYYMMDD'), to_char(sysdate,'HH24MISS'), #{creusr}, 
+		to_char(sysdate,'YYYYMMDD'), to_char(sysdate,'HH24MISS'), #{creusr},0)
+	</insert>
+
+	<delete id="deletePtBoard">
+		delete from photo_board
+		where pb_num=#{pbNum}
+	</delete>
+
+	<update id="updatePtBoard">
+		update photo_board 
+		<set>
+			moddat = to_Char(SYSDATE, 'YYYYMMDD'),
+			modtim = to_Char(SYSDATE, 'HH24MISS')
+			<if test='pbTitle != null'>
+				, pb_title = #{pbTitle}
+			</if>
+			<if test='pbImg1Names != null'>
+				, PB_IMG1NAMES = #{pbImg1Names}
+			</if>
+			<if test='pbImg2Names != null'>
+				, PB_IMG2NAMES = #{pbImg2Names}
+			</if>
+			<if test='pbContent != null'>
+				, pb_content = #{pbContent}
+			</if>
+			<if test='pbCnt != null'>
+				, pb_cnt = pb_cnt+1
+			</if>
+		</set>
+		where pb_num=#{pbNum}
+	</update>
+</mapper>

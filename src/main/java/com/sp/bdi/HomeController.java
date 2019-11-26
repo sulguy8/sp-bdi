@@ -27,21 +27,16 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
 		String formattedDate = dateFormat.format(date);
-		
 		model.addAttribute("serverTime", formattedDate );
 		List<String> strList = new ArrayList<String>();
 		strList.add("박도영 바보");
 		strList.add("박하늘 바보");
 		strList.add("박경훈 바보");
 		strList.add("김재빈 바보");
-		
 		model.addAttribute("strList", strList);
-		
 		return "home";
 	}
 	
