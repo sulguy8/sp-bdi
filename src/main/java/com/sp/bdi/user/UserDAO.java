@@ -7,5 +7,5 @@ import org.apache.ibatis.session.SqlSession;
 
 public interface UserDAO {
 	public List<Map<String,String>> selectUserList();
-	
+	public List<UserVO> selectUserVOList();
 }

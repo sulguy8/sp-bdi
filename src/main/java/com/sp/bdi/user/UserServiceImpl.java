@@ -9,13 +9,16 @@ import org.springframework.stereotype.Service;
 @Service("UserServiceImpl")
 public class UserServiceImpl implements UserService {
 	@Autowired
-	UserDAO udao;
+	private UserDAO udao;
+	
 	@Override
 	public List<Map<String, String>> getUserList() {
-		
-		System.out.println("나는 유저");
-		
+
 		return udao.selectUserList();
+	}
+	
+	public List<UserVO> getUserVOList(){
+		return udao.selectUserVOList();
 	}
 	
 }

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -17,20 +17,17 @@ public class UserController {
 	private UserService us; //	UserService us = new UserServiceImpl(); 이것과 같음.
 
 	
-	@RequestMapping(value = "/user/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/list")
 	public String getUserList(Model model) {
 		List<Map<String, String>> list = us.getUserList();
 		model.addAttribute("list", list);
 		System.out.println(model);
-		return "/user/list";
+		return "/user/ajax";
 	}
-	
-	@RequestMapping(value = "/user/test", method = RequestMethod.GET)
-	public String getPtBoardList(Model model) {
-		
-		List<Map<String, String>> list = us.getUserList();
-		
-		return "/user/list";
+	@RequestMapping(value = "/user/ajax")
+	public @ResponseBody List<UserVO> getUserList(){
+		System.out.println(us.getUserVOList());
+		return us.getUserVOList();
 	}
 	
 }
