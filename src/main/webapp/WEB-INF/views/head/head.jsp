@@ -27,17 +27,6 @@ function makeFormData(){
 	return formData;
 }
 
-function send(conf){
-	var xhr = new XMLHttpRequest();
-	xhr.open(conf.method, conf.url);
-	xhr.onreadystatechange = function(){
-		if(xhr.readyState==4){
-			if(xhr.status==200){
-				conf.func(xhr.responseText);
-			}
-		}
-	}
-	xhr.send(conf.data);
-}
+
 
 </script>

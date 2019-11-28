@@ -1,5 +1,6 @@
 package com.sp.bdi.user;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,14 +12,31 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO udao;
 	
-	@Override
-	public List<Map<String, String>> getUserList() {
+	public List<UserVO> getUserList(UserVO param) {
 
-		return udao.selectUserList();
+		return udao.selectUserList(param);
 	}
 	
-	public List<UserVO> getUserVOList(){
-		return udao.selectUserVOList();
+	public List<UserVO> getUserVOList(UserVO param){
+		return udao.selectUserVOList(param);
+	}
+
+	public Map<String, String> insertUserInfo(UserVO user) {
+		Map<String,String> rMap = new HashMap<String,String>();
+		rMap.put("cnt", udao.insertUserInfo(user)+"");
+		return rMap;
+	}
+
+	public Map<String, String> updateUserInfo(UserVO user) {
+		Map<String,String> rMap = new HashMap<String,String>();
+		rMap.put("cnt", udao.updateUserInfo(user)+"");
+		return rMap;
+	}
+
+	public Map<String, String> deleteUserInfo(UserVO user) {
+		Map<String,String> rMap = new HashMap<String,String>();
+		rMap.put("cnt", udao.deleteUserInfo(user)+"");
+		return rMap;
 	}
 	
 }

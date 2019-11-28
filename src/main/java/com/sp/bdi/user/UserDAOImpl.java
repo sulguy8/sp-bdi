@@ -7,35 +7,81 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 @Repository
 public class UserDAOImpl implements UserDAO {
-	
+
 	@Autowired
 	private SqlSessionFactory ssf;
-	
-	public List<Map<String, String>> selectUserList() {
+
+	public List<UserVO> selectUserList(UserVO param) {
 		SqlSession ss = ssf.openSession();
 		try {
-			return ss.selectList("com.sp.bdi.dao.UserInfoMapper.selectUserInfoList");		
+			return ss.selectList("com.sp.bdi.dao.UserInfoMapper.selectUserInfo", param);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			ss.commit();
 			ss.close();
-			
+
 		}
-			return null;		
+		return null;
 	}
-	
-	public List<UserVO> selectUserVOList() {
+
+	public List<UserVO> selectUserVOList(UserVO param) {
 		SqlSession ss = ssf.openSession();
 		try {
-			return ss.selectList("com.sp.bdi.dao.UserInfoMapper.selectUserInfoList");		
+			return ss.selectList("com.sp.bdi.dao.UserInfoMapper.selectUserInfoList", param);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			ss.commit();
 			ss.close();
-			
+
 		}
-			return null;		
+		return null;
+	}
+
+	public int insertUserInfo(UserVO user) {
+		SqlSession ss = ssf.openSession();
+		try {
+			return ss.insert("com.sp.bdi.dao.UserInfoMapper.insertUserInfo", user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.commit();
+			ss.close();
+
+		}
+		return 0;
+	}
+
+	public int updateUserInfo(UserVO user) {
+		SqlSession ss = ssf.openSession();
+		try {
+			return ss.update("com.sp.bdi.dao.UserInfoMapper.updateUserInfo", user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.commit();
+			ss.close();
+
+		}
+		return 0;
+	}
+
+	@Override
+	public int deleteUserInfo(UserVO user) {
+		SqlSession ss = ssf.openSession();
+		try {
+			return ss.delete("com.sp.bdi.dao.UserInfoMapper.deleteUserInfo", user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.commit();
+			ss.close();
+
+		}
+		return 0;
 	}
 }
