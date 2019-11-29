@@ -5,3 +5,5 @@
 <c:set var="rootPath" value="${pageContext.request.contextPath}/res"/>
 <c:set var="jsPath" value="${rootPath}/bt/js"/>
 <c:set var="cssPath" value="${rootPath}/bt/css"/>
+<c:set var ="codePath" value="${pageContext.request.contextPath}/res/codebase"/>
+<c:set var ="ver" value="0.0.0"/>

@@ -84,4 +84,19 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return 0;
 	}
+
+	@Override
+	public UserVO selectUserInfo(UserVO user) {
+		SqlSession ss = ssf.openSession();
+		try {
+			return ss.selectOne("com.sp.bdi.dao.UserInfoMapper.loginUserInfo", user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+			ss.close();
+
+		}
+		return null;
+	}
 }

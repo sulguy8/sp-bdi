@@ -38,5 +38,10 @@ public class UserServiceImpl implements UserService {
 		rMap.put("cnt", udao.deleteUserInfo(user)+"");
 		return rMap;
 	}
+
+	@Override
+	public UserVO login(UserVO user) {
+		return udao.selectUserInfo(user);
+	}
 	
 }

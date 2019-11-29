@@ -3,6 +3,8 @@ package com.sp.bdi.user;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,17 @@ public class UserController {
 		log.debug("나는 뷰! param : {}", param);
 
 		return us.getUserList(param);
+	}
+	
+	@RequestMapping(value = "/user/login", method=RequestMethod.POST) // 로그인
+	public @ResponseBody UserVO login(@RequestBody UserVO user, HttpSession hs){
+		log.debug("나는 로그인! param : {}", user);
+		user = us.login(user);
+		log.debug("select user : {}", user);
+		if(user!=null) {
+			hs.setAttribute("user", user);
+		}
+		return user;
 	}
 	
 	@RequestMapping(value = "/user/ajax", method=RequestMethod.POST) // 인서트
